@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in Healthcare Quiz | MedTech AI</title>
+  <style>
+    body {
+      margin: 0;
+      color: #14243a;
+      background: #f7faff;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 18px 7%;
+      background: white;
+      border-bottom: 1px solid #e4ecf5;
+    }
+
+    a { color: #2563eb; text-decoration: none; font-weight: bold; }
+
+    main {
+      max-width: 760px;
+      margin: 42px auto;
+      padding: 0 22px;
+    }
+
+    .quiz-card {
+      margin: 18px 0;
+      padding: 22px;
+      border: 1px solid #e4ecf5;
+      border-radius: 16px;
+      background: white;
+    }
+
+    .quiz-card h2 { margin-top: 0; font-size: 18px; }
+    label { display: block; margin: 12px 0; color: #52647a; cursor: pointer; }
+    input { margin-right: 8px; accent-color: #2563eb; }
+
+    button {
+      padding: 13px 19px;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      background: #2563eb;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { background: #1746a2; }
+
+    #result {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #eaf3ff;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 24px;
+      color: #61738b;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="courses.html">← Back to courses</a>
+  </header>
+
+  <main>
+    <h1>AI in Healthcare: Quick Quiz</h1>
+    <p>Check what you learned. Choose one answer for each question.</p>
+
+    <form id="quiz">
+      <div class="quiz-card">
+        <h2>1. What can an AI system do?</h2>
+        <label><input type="radio" name="q1" value="a"> Guarantee a correct medical diagnosis</label>
+        <label><input type="radio" name="q1" value="b"> Help recognize patterns in information</label>
+        <label><input type="radio" name="q1" value="c"> Replace every healthcare professional</label>
+      </div>
+
+      <div class="quiz-card">
+        <h2>2. How should AI results be used in healthcare?</h2>
+        <label><input type="radio" name="q2" value="a"> Without checking them</label>
+        <label><input type="radio" name="q2" value="b"> As a support tool reviewed by qualified professionals</label>
+        <label><input type="radio" name="q2" value="c"> As a substitute for all medical advice</label>
+      </div>
+
+      <div class="quiz-card">
+        <h2>3. Which is important when using AI with health information?</h2>
+        <label><input type="radio" name="q3" value="a"> Protecting privacy</label>
+        <label><input type="radio" name="q3" value="b"> Sharing personal details publicly</label>
+        <label><input type="radio" name="q3" value="c"> Ignoring possible errors</label>
+      </div>
+
+      <button type="submit">Check my answers</button>
+      <div id="result" hidden></div>
+    </form>
+  </main>
+
+  <footer>
+    Educational content only. MedTech AI does not provide medical advice or diagnosis.
+  </footer>
+
+  <script>
+    document.getElementById("quiz").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const answers = { q1: "b", q2: "b", q3: "a" };
+      let score = 0;
+
+      for (const question in answers) {
+        const selected = document.querySelector('input[name="' + question + '"]:checked');
+        if (selected && selected.value === answers[question]) score++;
+      }
+
+      const result = document.getElementById("result");
+      result.hidden = false;
+      result.textContent = "Your score: " + score + " out of 3. " +
+        (score === 3 ? "Excellent work!" : "Review the lessons and try again.");
+    });
+  </script>
+</body>
+</html>
