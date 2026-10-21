@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Lab | MedTech AI</title>
+
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-dark: #1746a2;
+      --pale: #f3f8ff;
+      --ink: #14243a;
+      --muted: #61738b;
+      --line: #e3ebf5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: var(--blue); text-decoration: none; font-weight: bold; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 7%;
+      border-bottom: 1px solid var(--line);
+    }
+
+    main { max-width: 1080px; margin: auto; padding: 42px 7%; }
+
+    .hero {
+      padding: 42px;
+      border: 1px solid #dfebfb;
+      border-radius: 24px;
+      background: linear-gradient(135deg, white, #edf5ff);
+    }
+
+    .tag {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 12px 0; font-size: clamp(36px, 5vw, 56px); }
+    h2 { margin-top: 42px; }
+    p { color: var(--muted); line-height: 1.7; }
+
+    .steps, .roles, .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .card strong { display: block; margin-bottom: 8px; }
+    .number { color: var(--blue); font-size: 13px; font-weight: bold; }
+
+    .role-button {
+      width: 100%;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: white;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .role-button:hover, .role-button.active {
+      border-color: #9fc4ff;
+      background: var(--pale);
+      color: var(--blue-dark);
+    }
+
+    .role-detail, .case {
+      margin-top: 18px;
+      padding: 22px;
+      border: 1px solid #dce9fb;
+      border-radius: 16px;
+      background: var(--pale);
+    }
+
+    .case { background: white; }
+    details { margin-top: 14px; }
+    summary { color: var(--blue-dark); font-weight: bold; cursor: pointer; }
+    footer {
+      padding: 25px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 5%; }
+      main { padding: 28px 5%; }
+      .hero { padding: 27px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <strong>MedTech AI · Explore Lab</strong>
+    <a href="index.html">← Home</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag">A learning space for connected thinking</span>
+      <h1>Explore the logic behind health technology.</h1>
+      <p>
+        Start with a healthcare question. Examine the evidence and data.
+        Explore what technology can do, then consider its limits and the role
+        of human judgment.
+      </p>
+      <a href="courses.html">Browse learning courses →</a>
+    </section>
+
+    <section>
+      <h2>One problem. Five ways to think.</h2>
+      <p>Use this map to explore how a healthcare idea becomes a responsible technology question.</p>
+
+      <div class="steps">
+        <div class="card"><span class="number">01</span><strong>Clinical question</strong><p>What problem are we trying to understand?</p></div>
+        <div class="card"><span class="number">02</span><strong>Evidence</strong><p>What reliable information supports our understanding?</p></div>
+        <div class="card"><span class="number">03</span><strong>Data</strong><p>What information is needed, and how should it be protected?</p></div>
+        <div class="card"><span class="number">04</span><strong>Technology &amp; AI</strong><p>Could a tool help? What are its limits?</p></div>
+        <div class="card"><span class="number">05</span><strong>Human review</strong><p>Who checks the result and decides what happens next?</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Choose your perspective</h2>
+      <p>The same challenge can raise different questions for different roles.</p>
+
+      <div class="roles">
+        <button class="role-button active" data-role="student">🎓 Student</button>
+        <button class="role-button" data-role="clinician">🩺 Healthcare professional</button>
+        <button class="role-button" data-role="technologist">💻 Technologist</button>
+      </div>
+
+      <div class="role-detail" id="role-detail">
+        <strong>Student perspective</strong>
+        <p>Build the foundations: learn the vocabulary, examine evidence, and ask how a tool is evaluated.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Explore a learning case</h2>
+      <div class="case">
+        <span class="tag">Educational scenario · Remote monitoring</span>
+        <h3>A device reports an unexpected change</h3>
+        <p>
+          A connected health device records a change and sends an alert.
+          Before drawing conclusions, explore what questions a team should ask.
+        </p>
+
+        <details>
+          <summary>1. What should we check about the data?</summary>
+          <p>Consider whether the reading is complete, current, and collected under the expected conditions.</p>
+        </details>
+
+        <details>
+          <summary>2. What should we ask about the technology?</summary>
+          <p>Understand what the tool was designed to do, how reliable it is, and what limitations are known.</p>
+        </details>
+
+        <details>
+          <summary>3. Why does human review matter?</summary>
+          <p>Technology can provide information, but qualified people need to interpret it in context.</p>
+        </details>
+      </div>
+    </section>
+
+    <section>
+      <h2>Continue exploring</h2>
+      <div class="topics">
+        <div class="card"><strong>AI in Healthcare</strong><p>Concepts, uses, responsible design, and human oversight.</p><a href="courses.html#ai-course">Open course →</a></div>
+        <div class="card"><strong>Medical Technology</strong><p>Devices, digital tools, usability, and safety thinking.</p><a href="courses.html#technology-course">Open course →</a></div>
+        <div class="card"><strong>Digital Health</strong><p>Telemedicine, privacy, and connected services.</p><a href="courses.html#digital-health-course">Open course →</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Educational content only. This scenario is for learning and is not medical advice or a clinical tool.
+  </footer>
+
+  <script>
+    const roleContent = {
+      student: {
+        title: "Student perspective",
+        text: "Build the foundations: learn the vocabulary, examine evidence, and ask how a tool is evaluated."
+      },
+      clinician: {
+        title: "Healthcare professional perspective",
+        text: "Consider the clinical context, patient needs, workflow, safety, and when expert judgment is essential."
+      },
+      technologist: {
+        title: "Technologist perspective",
+        text: "Think about data quality, privacy, usability, reliability, and how the system will be reviewed by people."
+      }
+    };
+
+    const detail = document.getElementById("role-detail");
+
+    document.querySelectorAll(".role-button").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".role-button").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        const content = roleContent[button.dataset.role];
+        detail.innerHTML = "<strong>" + content.title + "</strong><p>" + content.text + "</p>";
+      });
+    });
+  </script>
+</body>
+</html>
