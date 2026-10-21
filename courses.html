@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beginner-friendly courses about AI, medical technology, and digital health.">
   <title>Courses | MedTech AI</title>
 
   <style>
     :root {
       --blue: #2563eb;
-      --pale: #f3f8ff;
+      --blue-dark: #1746a2;
+      --blue-light: #eaf3ff;
+      --pale: #f7faff;
       --ink: #14243a;
       --muted: #61738b;
       --line: #e4ecf5;
     }
 
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -23,74 +28,137 @@
       font-family: Arial, sans-serif;
     }
 
+    a { color: inherit; text-decoration: none; }
+
     header {
+      position: sticky;
+      top: 0;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 18px 7%;
+      justify-content: space-between;
+      padding: 16px 7%;
       border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
     }
 
-    header a { color: var(--blue); font-weight: bold; text-decoration: none; }
-    main { max-width: 1050px; margin: auto; padding: 48px 7%; }
-    h1 { margin-bottom: 10px; font-size: clamp(34px, 5vw, 52px); }
-    .intro { color: var(--muted); line-height: 1.7; }
+    .brand { font-size: 18px; font-weight: 800; }
+    header a:last-child { color: var(--blue); font-weight: 700; }
+
+    main { max-width: 1080px; margin: auto; padding: 50px 7%; }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(36px, 5vw, 54px);
+      letter-spacing: -1.8px;
+    }
+
+    .intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
 
     .course-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin: 32px 0 55px;
+      margin: 34px 0 58px;
     }
 
-    .card {
+    .course-card {
       padding: 23px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 17px;
       background: white;
+      transition: .2s ease;
     }
 
-    .card:hover { border-color: #b7d2ff; background: var(--pale); }
-    .tag { color: var(--blue); font-size: 13px; font-weight: bold; }
-    .card h2 { margin: 12px 0 8px; font-size: 21px; }
-    .card p { color: var(--muted); line-height: 1.6; }
-    .card a { color: var(--blue); font-weight: bold; text-decoration: none; }
+    .course-card:hover {
+      transform: translateY(-4px);
+      border-color: #b9d5ff;
+      background: var(--pale);
+    }
 
-    .lesson-section {
+    .tag {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .course-card h2 { margin: 12px 0 8px; font-size: 20px; }
+    .course-card p { min-height: 72px; color: var(--muted); line-height: 1.6; }
+    .course-card a { color: var(--blue); font-size: 14px; font-weight: 750; }
+
+    .course {
       margin: 28px 0;
-      padding: 25px;
+      padding: 28px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      scroll-margin-top: 20px;
+      border-radius: 18px;
+      scroll-margin-top: 90px;
     }
 
-    .lesson-section h2 { margin-top: 0; }
-    .lesson { padding: 14px 0; border-top: 1px solid var(--line); }
+    .course h2 { margin: 0 0 8px; font-size: 27px; }
+    .course-intro { margin: 0 0 18px; color: var(--muted); line-height: 1.7; }
+
+    .lesson {
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
     .lesson h3 { margin: 0 0 7px; font-size: 17px; }
-    .lesson p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .lesson p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+    details {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid #d8e7fb;
+      border-radius: 12px;
+      background: var(--pale);
+    }
+
+    summary { color: var(--blue-dark); font-weight: 750; cursor: pointer; }
+    details p { margin: 12px 0 0; color: var(--muted); line-height: 1.6; }
 
     footer {
-      padding: 24px;
+      padding: 25px 7%;
       border-top: 1px solid var(--line);
       color: var(--muted);
-      text-align: center;
       font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
     }
 
-    @media (max-width: 600px) {
-      header { padding: 16px 5%; }
-      main { padding: 36px 5%; }
+    footer p { margin: 5px 0; }
+    .credit { color: var(--blue-dark); font-weight: 750; }
+
+    @media (max-width: 760px) {
+      header { padding: 15px 5%; }
+      main { padding: 38px 5%; }
+      .course-list { grid-template-columns: 1fr; }
+      .course-card p { min-height: 0; }
+      .course { padding: 21px; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <strong>MedTech AI</strong>
+    <a class="brand" href="index.html">MedTech AI</a>
     <a href="index.html">← Back to home</a>
   </header>
 
   <main>
+    <span class="eyebrow">Learn at your own pace</span>
     <h1>Explore the courses</h1>
     <p class="intro">
       Beginner-friendly learning paths about artificial intelligence,
@@ -98,90 +166,149 @@
     </p>
 
     <div class="course-list">
-      <article class="card">
+      <article class="course-card">
         <span class="tag">COURSE 01 · BEGINNER</span>
         <h2>AI in Healthcare</h2>
-        <p>Learn basic AI concepts and how these tools may support healthcare research and workflows.</p>
-        <a href="#ai-course">View course →</a>
+        <p>Learn basic AI concepts, healthcare examples, and why responsible use matters.</p>
+        <a href="#ai-course">Explore course →</a>
       </article>
 
-      <article class="card">
+      <article class="course-card">
         <span class="tag">COURSE 02 · BEGINNER</span>
         <h2>Medical Technology</h2>
-        <p>Explore medical devices, digital tools, and how technology can support care.</p>
-        <a href="#technology-course">View course →</a>
+        <p>Discover medical devices, digital tools, and how technology supports care.</p>
+        <a href="#technology-course">Explore course →</a>
       </article>
 
-      <article class="card">
+      <article class="course-card">
         <span class="tag">COURSE 03 · BEGINNER</span>
         <h2>Digital Health</h2>
-        <p>Discover telemedicine, health information, and connected digital experiences.</p>
-        <a href="#digital-health-course">View course →</a>
+        <p>Explore telemedicine, health information, and connected digital services.</p>
+        <a href="#digital-health-course">Explore course →</a>
       </article>
     </div>
 
-    <section class="lesson-section" id="ai-course">
+    <section class="course" id="ai-course">
       <h2>AI in Healthcare</h2>
-      <p><strong>What you will learn:</strong> basic AI concepts, examples of AI in healthcare, and why human review matters.</p>
+      <p class="course-intro">
+        Learn what AI is, where it may be used, and why professional review,
+        privacy, and responsible design are important.
+      </p>
 
-<div class="lesson">
-  <h3>Course introduction</h3>
-  <p>Artificial intelligence is a broad term for computer systems that perform tasks such as finding patterns in information. In healthcare, these tools may support research and professional workflows. They do not replace qualified healthcare professionals.</p>
-</div>
-
-<div class="lesson">
-  <h3>Quick reflection</h3>
-  <p>When a computer system gives a result, what information would a professional need before deciding whether that result is useful?</p>
-</div>
       <div class="lesson">
         <h3>Lesson 1: Understanding AI</h3>
-        <p>Learn what artificial intelligence is and how computer systems can recognize patterns.</p>
+        <p>
+          Artificial intelligence is a broad term for computer systems that
+          perform tasks such as recognizing patterns in information. Different
+          AI systems are built for different tasks and can make mistakes.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 2: Where AI is used</h3>
-        <p>Explore examples in research, medical imaging, and healthcare administration.</p>
+        <h3>Lesson 2: AI in healthcare</h3>
+        <p>
+          AI tools may support research, help organize information, or assist
+          professionals with specific workflows. Their results need context
+          and review from qualified people.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 3: Responsible AI</h3>
-        <p>Consider privacy, fairness, accuracy, and the importance of human review.</p>
+        <h3>Lesson 3: Responsible use</h3>
+        <p>
+          Responsible use considers privacy, accuracy, fairness, and human
+          oversight. AI should not replace professional medical advice,
+          diagnosis, or treatment.
+        </p>
       </div>
+
+      <details>
+        <summary>Knowledge check: What is a responsible way to use AI in healthcare?</summary>
+        <p>
+          Use AI as a support tool, protect private information, and have
+          qualified professionals review its results.
+        </p>
+      </details>
     </section>
 
-    <section class="lesson-section" id="technology-course">
+    <section class="course" id="technology-course">
       <h2>Medical Technology</h2>
+      <p class="course-intro">
+        Explore how medical tools and devices are designed to support patients
+        and healthcare professionals.
+      </p>
+
       <div class="lesson">
         <h3>Lesson 1: What is medical technology?</h3>
-        <p>Learn how tools and devices can help healthcare professionals and patients.</p>
+        <p>
+          Medical technology includes tools, devices, and software used in
+          healthcare settings. Each tool is designed for a particular purpose.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 2: From data to useful information</h3>
-        <p>See how health technologies collect and present information for people to review.</p>
+        <h3>Lesson 2: Designing for people</h3>
+        <p>
+          Good design considers safety, accessibility, ease of use, and the
+          needs of the people who use the technology.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 3: Designing for people</h3>
-        <p>Explore why safety, accessibility, and ease of use matter in health technology.</p>
+        <h3>Lesson 3: Evaluating new tools</h3>
+        <p>
+          New technology should be carefully evaluated for its intended use,
+          reliability, limitations, and effects on people.
+        </p>
       </div>
+
+      <details>
+        <summary>Knowledge check: Name one important design consideration.</summary>
+        <p>Safety, accessibility, and ease of use are all important considerations.</p>
+      </details>
     </section>
 
-    <section class="lesson-section" id="digital-health-course">
+    <section class="course" id="digital-health-course">
       <h2>Digital Health</h2>
+      <p class="course-intro">
+        Learn about digital services that connect people, information, and
+        healthcare teams.
+      </p>
+
       <div class="lesson">
         <h3>Lesson 1: Telemedicine</h3>
-        <p>Understand how digital communication can connect patients and healthcare teams.</p>
+        <p>
+          Telemedicine uses digital communication tools to support remote
+          interactions between patients and healthcare professionals.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 2: Health information</h3>
-        <p>Learn why health information needs to be handled carefully and kept private.</p>
+        <h3>Lesson 2: Health information and privacy</h3>
+        <p>
+          Health information is sensitive. Digital health services should
+          handle it carefully and explain how it is used.
+        </p>
       </div>
+
       <div class="lesson">
-        <h3>Lesson 3: The connected future</h3>
-        <p>Explore opportunities and challenges in digital health services.</p>
+        <h3>Lesson 3: Connected care</h3>
+        <p>
+          Digital tools can help connect services, but they should be designed
+          to work for people with different needs and levels of access.
+        </p>
       </div>
+
+      <details>
+        <summary>Knowledge check: Why should health information be protected?</summary>
+        <p>It is sensitive personal information and should be handled with care and respect for privacy.</p>
+      </details>
     </section>
   </main>
 
   <footer>
-    Educational content only. This platform does not provide medical advice or diagnosis.
+    <p>Educational content only. MedTech AI does not provide medical advice, diagnosis, or treatment.</p>
+    <p class="credit">Built by MedTech AI · © 2026</p>
   </footer>
 </body>
 </html>
