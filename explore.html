@@ -236,9 +236,26 @@
     Start with authoritative references. Check who published each resource,
     what it covers, and which country or context it applies to.
   </p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin:22px 0">
+  <input
+    id="resource-search"
+    type="search"
+    placeholder="Search resources..."
+    style="padding:12px;border:1px solid #e3ebf5;border-radius:10px;min-width:220px">
+
+  <select
+    id="resource-filter"
+    style="padding:12px;border:1px solid #e3ebf5;border-radius:10px;background:white">
+    <option value="all">All topics</option>
+    <option value="medicine">Medicine</option>
+    <option value="ai">AI</option>
+    <option value="technology">Technology</option>
+    <option value="ethics">Ethics</option>
+  </select>
+</div>
 
   <div class="topics">
-    <article class="card">
+    <article class="card resource-card" data-topics="medicine ai ethics">
       <span class="tag">WHO · ETHICS &amp; GOVERNANCE</span>
       <strong>Ethics and governance of AI for health</strong>
       <p>
@@ -253,7 +270,7 @@
       </a>
     </article>
 
-    <article class="card">
+    <article class="card resource-card" data-topics="medicine technology">
       <span class="tag">FDA · MEDICAL DEVICES</span>
       <strong>AI-enabled medical devices</strong>
       <p>
@@ -268,7 +285,7 @@
       </a>
     </article>
 
-    <article class="card">
+    <article class="card resource-card" data-topics="ai technology ethics">
       <span class="tag">NIST · AI RISK</span>
       <strong>AI Risk Management Framework</strong>
       <p>
@@ -323,5 +340,26 @@
       });
     });
   </script>
+  <script>
+  const resourceSearch = document.getElementById("resource-search");
+  const resourceFilter = document.getElementById("resource-filter");
+  const resourceCards = document.querySelectorAll(".resource-card");
+
+  function filterResources() {
+    const searchText = resourceSearch.value.toLowerCase().trim();
+    const selectedTopic = resourceFilter.value;
+
+    resourceCards.forEach(card => {
+      const topics = card.dataset.topics.split(" ");
+      const matchesTopic = selectedTopic === "all" || topics.includes(selectedTopic);
+      const matchesSearch = card.textContent.toLowerCase().includes(searchText);
+
+      card.hidden = !(matchesTopic && matchesSearch);
+    });
+  }
+
+  resourceSearch.addEventListener("input", filterResources);
+  resourceFilter.addEventListener("change", filterResources);
+</script>
 </body>
 </html>
