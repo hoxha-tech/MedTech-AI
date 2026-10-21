@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Explorer | MedTech AI</title>
+
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-dark: #1746a2;
+      --pale: #f3f8ff;
+      --ink: #14243a;
+      --muted: #61738b;
+      --line: #e3ebf5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: white;
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: var(--blue); text-decoration: none; font-weight: bold; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 7%;
+      border-bottom: 1px solid var(--line);
+    }
+
+    main { max-width: 980px; margin: auto; padding: 45px 7%; }
+
+    .hero {
+      padding: 34px;
+      border: 1px solid #dfebfb;
+      border-radius: 22px;
+      background: linear-gradient(135deg, white, #edf5ff);
+    }
+
+    .tag {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 12px 0; font-size: clamp(36px, 5vw, 54px); }
+    p { color: var(--muted); line-height: 1.7; }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 190px;
+      gap: 12px;
+      margin: 26px 0 16px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #d7e2ef;
+      border-radius: 11px;
+      background: white;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    input:focus, select:focus {
+      outline: 3px solid #dceaff;
+      border-color: var(--blue);
+    }
+
+    .suggestions { display: flex; flex-wrap: wrap; gap: 9px; margin: 14px 0 30px; }
+
+    .suggestions button {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--blue-dark);
+      background: white;
+      cursor: pointer;
+    }
+
+    .suggestions button:hover { background: var(--pale); }
+
+    #results {
+      display: grid;
+      gap: 14px;
+    }
+
+    .result-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .result-card h2 { margin: 9px 0; font-size: 20px; }
+    .result-card p { margin: 8px 0 14px; }
+    .category { color: var(--blue); font-size: 12px; font-weight: bold; text-transform: uppercase; }
+    .empty { padding: 20px; border-radius: 12px; background: var(--pale); }
+
+    footer {
+      padding: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      header { padding: 16px 5%; }
+      main { padding: 30px 5%; }
+      .search-row { grid-template-columns: 1fr; }
+      .hero { padding: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <strong>MedTech AI · Knowledge Explorer</strong>
+    <a href="explore.html">← Explore Lab</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag">Search the learning library</span>
+      <h1>Find a starting point.</h1>
+      <p>
+        Search core topics connecting medicine, technology, and artificial intelligence.
+        Each result includes a short explanation and a source to explore further.
+      </p>
+    </section>
+
+    <div class="search-row">
+      <input id="search" type="search" placeholder="Try “privacy”, “AI devices”, or “risk”">
+      <select id="category">
+        <option value="all">All topics</option>
+        <option value="Medicine">Medicine</option>
+        <option value="AI">AI</option>
+        <option value="Technology">Technology</option>
+        <option value="Ethics">Ethics</option>
+      </select>
+    </div>
+
+    <div class="suggestions">
+      <button type="button" data-query="AI">AI</button>
+      <button type="button" data-query="privacy">Privacy</button>
+      <button type="button" data-query="devices">Medical devices</button>
+      <button type="button" data-query="risk">Risk</button>
+    </div>
+
+    <div id="results" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    Educational information only. This library does not provide medical advice, diagnosis, or treatment.
+  </footer>
+
+  <script>
+    const library = [
+      {
+        title: "AI in health: ethics and governance",
+        category: "Ethics",
+        text: "Explore human autonomy, privacy, fairness, accountability, and responsible governance when AI is used in health.",
+        keywords: "medicine healthcare artificial intelligence ethics privacy fairness governance human oversight",
+        source: "World Health Organization guide",
+        url: "https://iris.who.int/bitstream/handle/10665/341996/9789240029200-eng.pdf?sequence=1"
+      },
+      {
+        title: "AI-enabled medical devices",
+        category: "Technology",
+        text: "Explore examples of AI-enabled medical devices authorized for marketing in the United States.",
+        keywords: "medicine medical technology devices FDA authorization health AI",
+        source: "U.S. Food and Drug Administration list",
+        url: "https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/list-artificial-intelligence-enabled-medical-devices"
+      },
+      {
+        title: "Managing risks in AI systems",
+        category: "AI",
+        text: "Learn about a voluntary framework for considering trustworthiness and managing AI risks across design, development, use, and evaluation.",
+        keywords: "risk safety trust trustworthy technology evaluation design development AI NIST",
+        source: "NIST AI Risk Management Framework",
+        url: "https://www.nist.gov/itl/ai-risk-management-framework"
+      },
+      {
+        title: "Privacy and health information",
+        category: "Medicine",
+        text: "Health information is sensitive. Consider what data a system needs, who can access it, and how privacy is protected.",
+        keywords: "privacy data medicine health information security ethics",
+        source: "World Health Organization guide",
+        url: "https://iris.who.int/bitstream/handle/10665/341996/9789240029200-eng.pdf?sequence=1"
+      },
+      {
+        title: "Human review of AI results",
+        category: "Medicine",
+        text: "AI tools can support specific tasks, but results need context and review by qualified people.",
+        keywords: "human review clinician professional medicine AI oversight safety",
+        source: "World Health Organization guide",
+        url: "https://iris.who.int/bitstream/handle/10665/341996/9789240029200-eng.pdf?sequence=1"
+      },
+      {
+        title: "Fairness and bias in AI",
+        category: "Ethics",
+        text: "When evaluating an AI system, consider whose data it was built with and whether its performance differs across groups or settings.",
+        keywords: "fairness bias equity data AI ethics evaluation",
+        source: "WHO and NIST learning resources",
+        url: "https://airc.nist.gov/"
+      }
+    ];
+
+    const searchInput = document.getElementById("search");
+    const categorySelect = document.getElementById("category");
+    const results = document.getElementById("results");
+
+    function showResults() {
+      const query = searchInput.value.toLowerCase().trim();
+      const category = categorySelect.value;
+
+      const matches = library.filter(item => {
+        const searchable = (item.title + " " + item.text + " " + item.keywords).toLowerCase();
+        const matchesText = searchable.includes(query);
+        const matchesCategory = category === "all" || item.category === category;
+        return matchesText && matchesCategory;
+      });
+
+      if (matches.length === 0) {
+        results.innerHTML = '<p class="empty">No matching topics found. Try a broader search word or choose “All topics”.</p>';
+        return;
+      }
+
+      results.innerHTML = matches.map(item => `
+        <article class="result-card">
+          <span class="category">${item.category}</span>
+          <h2>${item.title}</h2>
+          <p>${item.text}</p>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+            Source: ${item.source} →
+          </a>
+        </article>
+      `).join("");
+    }
+
+    searchInput.addEventListener("input", showResults);
+    categorySelect.addEventListener("change", showResults);
+
+    document.querySelectorAll(".suggestions button").forEach(button => {
+      button.addEventListener("click", () => {
+        searchInput.value = button.dataset.query;
+        showResults();
+      });
+    });
+
+    showResults();
+  </script>
+</body>
+</html>
