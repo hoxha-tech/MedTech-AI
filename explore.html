@@ -313,7 +313,58 @@
   </footer>
 
   <script>
-    const roleContent = {
+    <script>
+  const roleContent = {
+    student: {
+      title: "Student perspective",
+      text: "Build your foundations: learn the vocabulary, examine evidence, and ask how a tool is evaluated.",
+      links: [
+        ["AI in Healthcare course", "courses.html#ai-course"],
+        ["WHO guide: AI ethics and governance", "https://iris.who.int/bitstream/handle/10665/341996/9789240029200-eng.pdf?sequence=1"]
+      ]
+    },
+    clinician: {
+      title: "Healthcare professional perspective",
+      text: "Consider the care context, patient needs, workflow, safety, and when expert judgment is essential.",
+      links: [
+        ["Digital Health course", "courses.html#digital-health-course"],
+        ["FDA list of AI-enabled medical devices", "https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/list-artificial-intelligence-enabled-medical-devices"]
+      ]
+    },
+    technologist: {
+      title: "Technologist perspective",
+      text: "Think about data quality, privacy, usability, reliability, and how people will review the system.",
+      links: [
+        ["Medical Technology course", "courses.html#technology-course"],
+        ["NIST AI Risk Management Framework", "https://www.nist.gov/itl/ai-risk-management-framework"]
+      ]
+    }
+  };
+
+  const detail = document.getElementById("role-detail");
+
+  document.querySelectorAll(".role-button").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".role-button").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const content = roleContent[button.dataset.role];
+      const links = content.links.map(item =>
+        '<li><a href="' + item[1] + '" target="_blank" rel="noopener noreferrer">' +
+        item[0] + ' →</a></li>'
+      ).join("");
+
+      detail.innerHTML =
+        "<strong>" + content.title + "</strong>" +
+        "<p>" + content.text + "</p>" +
+        "<p><strong>Recommended starting points</strong></p>" +
+        "<ul>" + links + "</ul>";
+    });
+  });
+</script>
       student: {
         title: "Student perspective",
         text: "Build the foundations: learn the vocabulary, examine evidence, and ask how a tool is evaluated."
