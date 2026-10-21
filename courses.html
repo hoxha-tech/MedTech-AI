@@ -4,22 +4,173 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Courses | MedTech AI</title>
+
+  <style>
+    :root {
+      --blue: #2563eb;
+      --pale: #f3f8ff;
+      --ink: #14243a;
+      --muted: #61738b;
+      --line: #e4ecf5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      border-bottom: 1px solid var(--line);
+    }
+
+    header a { color: var(--blue); font-weight: bold; text-decoration: none; }
+    main { max-width: 1050px; margin: auto; padding: 48px 7%; }
+    h1 { margin-bottom: 10px; font-size: clamp(34px, 5vw, 52px); }
+    .intro { color: var(--muted); line-height: 1.7; }
+
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 32px 0 55px;
+    }
+
+    .card {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+    }
+
+    .card:hover { border-color: #b7d2ff; background: var(--pale); }
+    .tag { color: var(--blue); font-size: 13px; font-weight: bold; }
+    .card h2 { margin: 12px 0 8px; font-size: 21px; }
+    .card p { color: var(--muted); line-height: 1.6; }
+    .card a { color: var(--blue); font-weight: bold; text-decoration: none; }
+
+    .lesson-section {
+      margin: 28px 0;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      scroll-margin-top: 20px;
+    }
+
+    .lesson-section h2 { margin-top: 0; }
+    .lesson { padding: 14px 0; border-top: 1px solid var(--line); }
+    .lesson h3 { margin: 0 0 7px; font-size: 17px; }
+    .lesson p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    footer {
+      padding: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 5%; }
+      main { padding: 36px 5%; }
+    }
+  </style>
 </head>
+
 <body>
-  <p><a href="index.html">← Back to MedTech AI</a></p>
+  <header>
+    <strong>MedTech AI</strong>
+    <a href="index.html">← Back to home</a>
+  </header>
 
-  <h1>Introduction to AI in Healthcare</h1>
-  <p>A beginner-friendly learning path about artificial intelligence in healthcare.</p>
+  <main>
+    <h1>Explore the courses</h1>
+    <p class="intro">
+      Beginner-friendly learning paths about artificial intelligence,
+      medical technology, and digital health.
+    </p>
 
-  <h2>Lesson 1: What is AI?</h2>
-  <p>AI describes computer systems that can perform tasks such as recognizing patterns.</p>
+    <div class="course-list">
+      <article class="card">
+        <span class="tag">COURSE 01 · BEGINNER</span>
+        <h2>AI in Healthcare</h2>
+        <p>Learn basic AI concepts and how these tools may support healthcare research and workflows.</p>
+        <a href="#ai-course">View course →</a>
+      </article>
 
-  <h2>Lesson 2: AI in healthcare</h2>
-  <p>AI can support research and healthcare workflows. Qualified professionals must review its results.</p>
+      <article class="card">
+        <span class="tag">COURSE 02 · BEGINNER</span>
+        <h2>Medical Technology</h2>
+        <p>Explore medical devices, digital tools, and how technology can support care.</p>
+        <a href="#technology-course">View course →</a>
+      </article>
 
-  <h2>Lesson 3: Responsible use</h2>
-  <p>Privacy, accuracy, fairness, and human oversight matter when using AI.</p>
+      <article class="card">
+        <span class="tag">COURSE 03 · BEGINNER</span>
+        <h2>Digital Health</h2>
+        <p>Discover telemedicine, health information, and connected digital experiences.</p>
+        <a href="#digital-health-course">View course →</a>
+      </article>
+    </div>
 
-  <p>Educational content only. Not medical advice.</p>
+    <section class="lesson-section" id="ai-course">
+      <h2>AI in Healthcare</h2>
+      <div class="lesson">
+        <h3>Lesson 1: Understanding AI</h3>
+        <p>Learn what artificial intelligence is and how computer systems can recognize patterns.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 2: Where AI is used</h3>
+        <p>Explore examples in research, medical imaging, and healthcare administration.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 3: Responsible AI</h3>
+        <p>Consider privacy, fairness, accuracy, and the importance of human review.</p>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="technology-course">
+      <h2>Medical Technology</h2>
+      <div class="lesson">
+        <h3>Lesson 1: What is medical technology?</h3>
+        <p>Learn how tools and devices can help healthcare professionals and patients.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 2: From data to useful information</h3>
+        <p>See how health technologies collect and present information for people to review.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 3: Designing for people</h3>
+        <p>Explore why safety, accessibility, and ease of use matter in health technology.</p>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="digital-health-course">
+      <h2>Digital Health</h2>
+      <div class="lesson">
+        <h3>Lesson 1: Telemedicine</h3>
+        <p>Understand how digital communication can connect patients and healthcare teams.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 2: Health information</h3>
+        <p>Learn why health information needs to be handled carefully and kept private.</p>
+      </div>
+      <div class="lesson">
+        <h3>Lesson 3: The connected future</h3>
+        <p>Explore opportunities and challenges in digital health services.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Educational content only. This platform does not provide medical advice or diagnosis.
+  </footer>
 </body>
 </html>
