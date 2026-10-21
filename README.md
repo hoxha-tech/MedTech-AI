@@ -1,2 +1,2 @@
-# MedTech-IA
+# MedTech-AI
 AI and medical technology learning platform
